@@ -8,3 +8,6 @@
         - <%= contact.phone_number %></li>
   <% end %>
 </ul>
+
+<a href="<%= url("?page=#{@page - 1}") %>">Prev</a> |
+<a href="<%= url("?page=#{@page + 1}") %>">Next</a>

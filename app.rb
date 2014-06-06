@@ -5,7 +5,11 @@ require 'sinatra/activerecord'
 require_relative 'models/contact'
 
 get '/' do
-  @contacts = Contact.all
+
+  @page = params[:page].to_i
+
+  @contacts = Contact.limit(2).offset(@page * 2)
+
   erb :index
 end
 
