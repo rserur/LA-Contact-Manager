@@ -44,8 +44,6 @@ post '/submit' do
 
   Contact.create(first_name: @first_name, last_name: @last_name, phone_number: @phone_number)
 
-  @contact = Contact.find(params[:id])
-
-  erb :index
+  redirect '/'
 
 end

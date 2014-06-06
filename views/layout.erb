@@ -4,9 +4,52 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Manager</title>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/css/normalize.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/css/foundation.css">
     <link rel="stylesheet" href="css/app.css" />
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/js/foundation.min.js"></script>
   </head>
   <body>
-    <%= yield %>
+    <div class="row">
+      <div class="medium-12 columns">
+        <a href="/"><h1>Contacts</h1></a>
+      </div>
+    </div>
+    <div class="row">
+      <hr>
+      <div class="medium-8 columns">
+        <form action="/" method="get">
+          <input type="text" name="query" id="query" placeholder="Search Contacts"/>
+        </div>
+        <div class="medium-4 columns">
+          <input class="button postfix" type="submit" value="Search" />
+        </form>
+      </div>
+      <hr>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= yield %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="button-bar">
+          <ul class="button-group">
+            <% if @search_term == nil %>
+            <% if @page != 0 && @page != nil %>
+            <li><a href="<%= url("?page=#{@page - 1}") %>" class="small button">Prev</a></li>
+            <% end %>
+            <% if @page != @last_page %>
+            <li><a href="<%= url("?page=#{@page + 1}") %>" class="small button">Next</a></li>
+            <% end %>
+            <% end %>
+            <% if @page != nil %>
+            <li><a href="/submit" class="small button">Add New</a></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

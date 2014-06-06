@@ -1,10 +1,3 @@
-<h1>Contacts</h1>
-
-<form action="/" method="get">
-  <input type="text" name="query" id="query" />
-  <input type="submit" value="Search" />
-</form>
-
 <ul>
 
     <% @contacts.each do |contact| %>
@@ -15,12 +8,3 @@
     <% end %>
 
 </ul>
-
-<% if @search_term == nil %>
-  <% if @page != 0 %>
-    <a href="<%= url("?page=#{@page - 1}") %>">Prev</a> |
-  <% end %>
-  <% if @page != @last_page %>
-    <a href="<%= url("?page=#{@page + 1}") %>">Next</a>
-  <% end %>
-<% end %>
