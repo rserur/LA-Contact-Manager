@@ -8,7 +8,14 @@ get '/' do
 
   @page = params[:page].to_i
 
-  @contacts = Contact.limit(2).offset(@page * 2)
+  @search_term = params[:query]
+
+  if @search_term != nil
+    @contacts = Contact.where("first_name ILIKE '%#{@search_term}%' OR last_name ILIKE '%#{@search_term}%'")
+  else
+
+    @contacts = Contact.limit(2).offset(@page * 2)
+  end
 
   erb :index
 end
@@ -16,5 +23,6 @@ end
 get '/contacts/:id' do
 
   @contact = Contact.find(params[:id])
+
   erb :show
 end

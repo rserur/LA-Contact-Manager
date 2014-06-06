@@ -1,11 +1,18 @@
 <h1>Contacts</h1>
 
+<form action="/" method="get">
+  <input type="text" name="query" id="query" />
+  <input type="submit" value="Search" />
+</form>
+
 <ul>
-  <% @contacts.each do |contact| %>
-    <li>
-      <a href="<%= url("contacts/#{contact.id}") %>">
-        <%= contact.name %></a>
-        - <%= contact.phone_number %></li>
+  <% if @contacts != nil %>
+    <% @contacts.each do |contact| %>
+      <li>
+        <a href="<%= url("contacts/#{contact.id}") %>">
+          <%= contact.name %></a>
+          - <%= contact.phone_number %></li>
+    <% end %>
   <% end %>
 </ul>
 
