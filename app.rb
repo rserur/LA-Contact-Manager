@@ -14,10 +14,13 @@ get '/' do
     @contacts = Contact.where("first_name ILIKE '%#{@search_term}%' OR last_name ILIKE '%#{@search_term}%'")
   else
 
-    @contacts = Contact.limit(2).offset(@page * 2)
+    @contacts = Contact.limit(2).offset(@page * 2).order(first_name: :asc)
   end
 
+  @last_page = (Contact.count / 2) - 1
+
   erb :index
+
 end
 
 get '/contacts/:id' do
@@ -25,4 +28,24 @@ get '/contacts/:id' do
   @contact = Contact.find(params[:id])
 
   erb :show
+end
+
+get '/submit' do
+
+  erb :submit
+
+end
+
+post '/submit' do
+
+  @first_name = params[:first_name]
+  @last_name = params[:last_name]
+  @phone_number = params[:phone_number]
+
+  Contact.create(first_name: @first_name, last_name: @last_name, phone_number: @phone_number)
+
+  @contact = Contact.find(params[:id])
+
+  erb :index
+
 end

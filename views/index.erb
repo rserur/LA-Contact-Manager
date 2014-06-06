@@ -6,15 +6,21 @@
 </form>
 
 <ul>
-  <% if @contacts != nil %>
+
     <% @contacts.each do |contact| %>
       <li>
         <a href="<%= url("contacts/#{contact.id}") %>">
           <%= contact.name %></a>
           - <%= contact.phone_number %></li>
     <% end %>
-  <% end %>
+
 </ul>
 
-<a href="<%= url("?page=#{@page - 1}") %>">Prev</a> |
-<a href="<%= url("?page=#{@page + 1}") %>">Next</a>
+<% if @search_term == nil %>
+  <% if @page != 0 %>
+    <a href="<%= url("?page=#{@page - 1}") %>">Prev</a> |
+  <% end %>
+  <% if @page != @last_page %>
+    <a href="<%= url("?page=#{@page + 1}") %>">Next</a>
+  <% end %>
+<% end %>
